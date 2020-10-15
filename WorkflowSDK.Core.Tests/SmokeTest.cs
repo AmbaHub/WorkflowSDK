@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using WorkflowSDK.Core.Model;
 using WorkflowSDK.Core.Model.DI;
 using WorkflowSDK.Core.Model.StepModel;
 using WorkflowSDK.Core.Tests.TestObjects;

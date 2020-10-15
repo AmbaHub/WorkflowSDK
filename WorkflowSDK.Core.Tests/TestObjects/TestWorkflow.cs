@@ -1,4 +1,4 @@
-﻿using WorkflowSDK.Core.Model.WorkflowModel;
+﻿using WorkflowSDK.Core.Model.Workflow;
 
 namespace WorkflowSDK.Core.Tests.TestObjects
 {

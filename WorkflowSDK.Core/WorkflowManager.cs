@@ -9,7 +9,6 @@ namespace WorkflowSDK.Core
 {
     public interface IWorkflowManager
     {
-        IStepFactory StepFactory { get; }
         IEnumerable<IWorkflow> AllWorkflows { get; }
         IWorkflow<T> CreateWorkflow<T>(T workflowData) where T : new();
         IWorkflow<T> CreateWorkflow<T>(T workflowData, string key) where T : new();
@@ -19,12 +18,6 @@ namespace WorkflowSDK.Core
     {
         private readonly Dictionary<string, IWorkflow> _workflows = new Dictionary<string, IWorkflow>();
         public IEnumerable<IWorkflow> AllWorkflows => _workflows.Select(x => x.Value);
-        public IStepFactory StepFactory { get; }
-
-        public WorkflowManager(IStepFactory stepFactory)
-        {
-            StepFactory = stepFactory;
-        }
 
         public IWorkflow<T> CreateWorkflow<T>(T workflowData) where T : new() => CreateWorkflow(workflowData, null);
         public IWorkflow<T> CreateWorkflow<T>(T workflowData, string key) where T : new()

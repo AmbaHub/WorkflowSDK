@@ -12,17 +12,20 @@ namespace WorkflowSDK.Core.Model.DI
     public class StepFactory : IStepFactory
     {
         private readonly ILogger _logger;
+        private readonly IWorkflowManager _workflowManager;
         private readonly IWorkflowValidatorProvider _workflowValidatorProvider;
         private readonly IStepSettingsProvider _stepSettingsProvider;
         private readonly IStepDependencyProvider _stepDependencyProvider;
 
         public StepFactory(
-            ILogger logger, 
+            ILogger logger,
+            IWorkflowManager workflowManager,
             IWorkflowValidatorProvider workflowValidatorProvider,
             IStepSettingsProvider stepSettingsProvider, 
             IStepDependencyProvider stepDependencyProvider)
         {
             _logger = logger;
+            _workflowManager = workflowManager;
             _workflowValidatorProvider = workflowValidatorProvider;
             _stepSettingsProvider = stepSettingsProvider;
             _stepDependencyProvider = stepDependencyProvider;
@@ -34,6 +37,7 @@ namespace WorkflowSDK.Core.Model.DI
             {
                 _stepSettingsProvider.GetStepSettings<T>(),
                 _logger,
+                _workflowManager,
                 this,
                 _workflowValidatorProvider.GetValidators<T>()
             };

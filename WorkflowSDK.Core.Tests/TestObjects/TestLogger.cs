@@ -17,7 +17,24 @@ namespace WorkflowSDK.Core.Tests.TestObjects
         {
         }
 
+        public void Log<T>(LogLevel logLevel, T log)
+        {
+            
+        }
+
         public void Log<T>()
+        {
+        }
+
+        public void Log<T>(LogLevel logLevel)
+        {
+        }
+
+        public void LogException(Exception ex)
+        {
+        }
+
+        public void LogFatalException(Exception ex)
         {
         }
 

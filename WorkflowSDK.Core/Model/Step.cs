@@ -13,10 +13,12 @@ namespace WorkflowSDK.Core.Model
         private readonly WorkflowDataValidator[] _workflowDataValidators;
         protected readonly ILogger Logger;
         protected readonly IStepFactory StepFactory;
+        protected readonly IWorkflowManager WorkflowManager;
         public StepSettings StepSettings { get; }
 
-        protected internal Step(StepSettings stepSettings, ILogger logger, IStepFactory stepFactory, WorkflowDataValidator[] workflowDataValidators)
+        protected internal Step(StepSettings stepSettings, ILogger logger, IWorkflowManager workflowManager, IStepFactory stepFactory, WorkflowDataValidator[] workflowDataValidators)
         {
+            WorkflowManager = workflowManager;
             _workflowDataValidators = workflowDataValidators;
             Logger = logger;
             StepFactory = stepFactory;
@@ -128,9 +130,10 @@ namespace WorkflowSDK.Core.Model
         protected Step(
             StepSettings stepSettings,
             ILogger logger,
+            IWorkflowManager workflowManager,
             IStepFactory stepFactory,
             WorkflowDataValidator[] workflowDataValidators) :
-            base(stepSettings, logger, stepFactory, workflowDataValidators)
+            base(stepSettings, logger, workflowManager, stepFactory, workflowDataValidators)
         {
 
 

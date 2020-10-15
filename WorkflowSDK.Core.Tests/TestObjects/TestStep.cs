@@ -1,7 +1,7 @@
-﻿using WorkflowSDK.Core.Model.DI;
-using WorkflowSDK.Core.Model.StepModel;
+﻿using WorkflowSDK.Core.Model;
+using WorkflowSDK.Core.Model.DI;
 using WorkflowSDK.Core.Model.Validation;
-using WorkflowSDK.Core.Model.WorkflowModel;
+using WorkflowSDK.Core.Model.Workflow;
 using WorkflowSDK.Log;
 
 namespace WorkflowSDK.Core.Tests.TestObjects
@@ -13,9 +13,10 @@ namespace WorkflowSDK.Core.Tests.TestObjects
             TestStepDependency testStepDependency,
             StepSettings stepSettings, 
             ILogger logger, 
+            IWorkflowManager workflowManager,
             IStepFactory stepFactory,
             WorkflowDataValidator[] workflowDataValidators) : 
-            base(stepSettings, logger, stepFactory, workflowDataValidators)
+            base(stepSettings, logger, workflowManager, stepFactory, workflowDataValidators)
         {
             _testStepDependency = testStepDependency;
         }
