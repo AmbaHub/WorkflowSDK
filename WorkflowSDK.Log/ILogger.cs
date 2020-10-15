@@ -15,17 +15,4 @@ namespace WorkflowSDK.Log
         void LogException(Exception ex);
         void LogFatalException(Exception ex);
     }
-
-    public enum LogLevel 
-    {
-        Default,
-        Debug,
-        Trace,
-        Info,
-        System,
-        Warning,
-        Error
-    }
-
-
 }
