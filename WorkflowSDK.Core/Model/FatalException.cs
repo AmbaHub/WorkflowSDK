@@ -13,7 +13,17 @@ namespace WorkflowSDK.Core.Model
 
         public static FatalException GetFatalException(string message)
         {
-            return new FatalException {InnerMainException = new Exception(message)};
+            return new FatalException
+            {
+                InnerMainException = new Exception(message)
+            };
+        }
+        public static FatalException<T> GetFatalException<T>(string message) where T : Exception, new()
+        {
+            return new FatalException<T>
+            {
+                InnerMainException = typeof(T).CreateInstance<T>(new object[]{message})
+            };
         }
         public static void ArgumentException(string message)
         {
