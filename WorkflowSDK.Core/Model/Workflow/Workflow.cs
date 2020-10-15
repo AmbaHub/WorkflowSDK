@@ -21,7 +21,7 @@ namespace WorkflowSDK.Core.Model.Workflow
             key = step.GetType().GenerateKey(key);
 
             if (MemoryProcesses.ContainsKey(key))
-                throw new Exception();
+                FatalException.ArgumentException($"Key already exists for background process : {key}");
 
             var flow = this.RunWorkflowAsync(step);
 
@@ -92,7 +92,7 @@ namespace WorkflowSDK.Core.Model.Workflow
             set => WorkflowDataObject = value;
         }
         public virtual void CopyTo<TF>(IWorkflow<TF> other, bool overwrite) 
-            where TF : class, new()
+            where TF : new()
         {
             FatalException.ArgumentNullException(other, nameof(other));
 
@@ -102,7 +102,7 @@ namespace WorkflowSDK.Core.Model.Workflow
             other.WorkflowData.SetContent(WorkflowData.GetContent(), overwrite);
         }
 
-        public virtual IWorkflow<TF> As<TF>() where TF : class, new()
+        public virtual IWorkflow<TF> As<TF>() where TF : new()
         {
             using (this)
             {

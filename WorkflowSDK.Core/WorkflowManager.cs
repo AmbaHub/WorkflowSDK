@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using WorkflowSDK.Core.Model;
+using WorkflowSDK.Core.Model.DI;
 using WorkflowSDK.Core.Model.Workflow;
 
 namespace WorkflowSDK.Core
 {
     public interface IWorkflowManager
     {
+        IStepFactory StepFactory { get; }
         IEnumerable<IWorkflow> AllWorkflows { get; }
         IWorkflow<T> CreateWorkflow<T>(T workflowData) where T : new();
         IWorkflow<T> CreateWorkflow<T>(T workflowData, string key) where T : new();
@@ -17,6 +19,12 @@ namespace WorkflowSDK.Core
     {
         private readonly Dictionary<string, IWorkflow> _workflows = new Dictionary<string, IWorkflow>();
         public IEnumerable<IWorkflow> AllWorkflows => _workflows.Select(x => x.Value);
+        public IStepFactory StepFactory { get; }
+
+        public WorkflowManager(IStepFactory stepFactory)
+        {
+            StepFactory = stepFactory;
+        }
 
         public IWorkflow<T> CreateWorkflow<T>(T workflowData) where T : new()
         {
@@ -58,7 +66,7 @@ namespace WorkflowSDK.Core
 
         public void Dispose()
         {
-            foreach (var (k,v) in _workflows) 
+            foreach (var (k, v) in _workflows)
                 v.Dispose();
 
             _workflows.Clear();

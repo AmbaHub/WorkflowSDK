@@ -6,6 +6,13 @@ namespace WorkflowSDK.Core.Model
     {
         internal Exception InnerMainException { get; set; }
 
+        public static void ArgumentException(string message)
+        {
+            throw new FatalException<ArgumentException>
+            {
+                MainException = new ArgumentException(message)
+            };
+        }
         public static void ArgumentNullException(object obj, string message)
         {
             if (obj == null)

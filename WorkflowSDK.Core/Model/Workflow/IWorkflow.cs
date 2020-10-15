@@ -20,7 +20,7 @@ namespace WorkflowSDK.Core.Model.Workflow
     public interface IWorkflow<T> : IWorkflow where T : new()
     {
         T WorkflowData { get; set; }
-        void CopyTo<TF>(IWorkflow<TF> other, bool overwrite) where TF : class, new();
-        IWorkflow<TF> As<TF>() where TF : class, new();
+        void CopyTo<TF>(IWorkflow<TF> other, bool overwrite) where TF : new();
+        IWorkflow<TF> As<TF>() where TF : new();
     }
 }
