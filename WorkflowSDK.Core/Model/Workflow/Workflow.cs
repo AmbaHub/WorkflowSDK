@@ -38,10 +38,10 @@ namespace WorkflowSDK.Core.Model.Workflow
             {
                 return value is Task<TFlow> task
                     ? await task
-                    : throw new Exception();
+                    : throw FatalException.GetFatalException("");
             }
 
-            throw new Exception();
+            throw FatalException.GetFatalException(""); ;
         }
 
         public async Task<TFlow> Run<TFlow, TStep>(TStep step)
@@ -52,7 +52,7 @@ namespace WorkflowSDK.Core.Model.Workflow
             if (result is TFlow correctResultType)
                 return correctResultType;
 
-            throw new Exception($"{result}");
+            throw FatalException.GetFatalException("");
         }
 
         public async Task<IWorkflow> RunPrevious()
