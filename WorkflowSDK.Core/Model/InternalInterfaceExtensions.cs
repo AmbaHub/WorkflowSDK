@@ -7,7 +7,7 @@ using WorkflowSDK.Core.Model.Workflow;
 
 namespace WorkflowSDK.Core.Model
 {
-    internal static class InternalInterfaceExtensions
+    internal static class InternalExtensions
     {
         internal static async Task<IWorkflow> RunWorkflowAsync(this IWorkflow workflow, Step step)
         {
