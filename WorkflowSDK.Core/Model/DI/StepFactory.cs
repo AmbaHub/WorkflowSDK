@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using WorkflowSDK.Core.Model.StepModel;
-using WorkflowSDK.Core.Model.WorkflowModel;
 using WorkflowSDK.Log;
 
 namespace WorkflowSDK.Core.Model.DI

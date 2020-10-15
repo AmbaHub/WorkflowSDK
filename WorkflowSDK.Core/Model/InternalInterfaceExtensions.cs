@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using WorkflowSDK.Core.Model.DI;
-using WorkflowSDK.Core.Model.StepModel;
+using WorkflowSDK.Core.Model.Workflow;
 
-namespace WorkflowSDK.Core.Model.WorkflowModel
+namespace WorkflowSDK.Core.Model
 {
     internal static class InternalInterfaceExtensions
     {

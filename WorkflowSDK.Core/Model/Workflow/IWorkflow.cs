@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using WorkflowSDK.Core.Model.StepModel;
 
-namespace WorkflowSDK.Core.Model.WorkflowModel
+namespace WorkflowSDK.Core.Model.Workflow
 {
     public interface IWorkflow : IDisposable
     {

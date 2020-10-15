@@ -1,5 +1,4 @@
-﻿using WorkflowSDK.Core.Model.StepModel;
-using WorkflowSDK.Core.Model.Validation;
+﻿using WorkflowSDK.Core.Model.Validation;
 
 namespace WorkflowSDK.Core.Model.DI
 {

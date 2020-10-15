@@ -1,5 +1,5 @@
 ﻿using System;
-using WorkflowSDK.Core.Model.WorkflowModel;
+using WorkflowSDK.Core.Model.Workflow;
 
 namespace WorkflowSDK.Core.Model.Validation
 {

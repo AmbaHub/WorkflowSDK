@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WorkflowSDK.Core.Model.StepModel
+namespace WorkflowSDK.Core.Model
 {
     public sealed class StepSettings
     {

@@ -1,7 +1,4 @@
-﻿using WorkflowSDK.Core.Model.DI;
-using WorkflowSDK.Core.Model.StepModel;
-
-namespace WorkflowSDK.Core.Model.WorkflowModel
+﻿namespace WorkflowSDK.Core.Model.Workflow
 {
     public class WorkflowStatus
     {

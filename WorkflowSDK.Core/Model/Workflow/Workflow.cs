@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WorkflowSDK.Core.Model.StepModel;
 
-namespace WorkflowSDK.Core.Model.WorkflowModel
+namespace WorkflowSDK.Core.Model.Workflow
 {
     public abstract class Workflow : IWorkflow
     {

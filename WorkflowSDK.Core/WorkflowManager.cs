@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WorkflowSDK.Core.Model;
-using WorkflowSDK.Core.Model.WorkflowModel;
+using WorkflowSDK.Core.Model.Workflow;
 
 namespace WorkflowSDK.Core
 {

@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WorkflowSDK.Core.Model.DI;
 using WorkflowSDK.Core.Model.Validation;
-using WorkflowSDK.Core.Model.WorkflowModel;
+using WorkflowSDK.Core.Model.Workflow;
 using WorkflowSDK.Log;
 
-namespace WorkflowSDK.Core.Model.StepModel
+namespace WorkflowSDK.Core.Model
 {
     public abstract class Step
     {

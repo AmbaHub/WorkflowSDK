@@ -1,6 +1,4 @@
-﻿using WorkflowSDK.Core.Model.StepModel;
-
-namespace WorkflowSDK.Core.Model.DI
+﻿namespace WorkflowSDK.Core.Model.DI
 {
     public interface IStepSettingsProvider
     {
