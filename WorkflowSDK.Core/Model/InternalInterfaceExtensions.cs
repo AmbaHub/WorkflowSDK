@@ -66,7 +66,29 @@ namespace WorkflowSDK.Core.Model
                 ? $"{type.FullName}.{key}"
                 : $"{type.FullName}";
         }
-
+        internal static T CreateInstance<T>()
+        {
+            try
+            {
+                return Activator.CreateInstance<T>();
+            }
+            catch (Exception e)
+            {
+                throw new FatalException { InnerMainException = e };
+            }
+        }
+        internal static T CreateInstance<T>(this Type type, object[] args)
+        {
+            try
+            {
+                return (T) Activator.CreateInstance(type, args);
+            }
+            catch (Exception e)
+            {
+                throw new FatalException {InnerMainException = e};
+            }
+        }
+        
         private static PropertyInfo[] GetProperties(object workflowData)
         {
             return workflowData

@@ -106,7 +106,7 @@ namespace WorkflowSDK.Core.Model.Workflow
         {
             using (this)
             {
-                var wf = Activator.CreateInstance<IWorkflow<TF>>();
+                var wf = InternalInterfaceExtensions.CreateInstance<IWorkflow<TF>>();
                 wf.WorkflowData = new TF();
                 CopyTo(wf,true);
                 return wf;

@@ -40,9 +40,7 @@ namespace WorkflowSDK.Core.Model.DI
 
             parameters.Insert(0,_stepDependencyProvider.GetStepDependencies<T>());
 
-            if (Activator.CreateInstance(typeof(T), parameters.ToArray()) is T step) return step;
-
-            throw new Exception();
+            return typeof(T).CreateInstance<T>(parameters.ToArray());
         }
     }
 }

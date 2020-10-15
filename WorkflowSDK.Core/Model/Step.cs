@@ -45,9 +45,7 @@ namespace WorkflowSDK.Core.Model
                 () =>
                 {
                     if (StepSettings.RunPreviousOnError)
-                    {
                         return workflow.RunPrevious().Result;
-                    }
 
                     if (StepSettings.OnFailedStep != null)
                         Task.Run(() => InvokeAction(() => StepSettings.OnFailedStep.Invoke()));

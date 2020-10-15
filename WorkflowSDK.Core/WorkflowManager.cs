@@ -38,7 +38,6 @@ namespace WorkflowSDK.Core
             _workflows.Add(key, wf);
             return wf;
         }
-
         public IWorkflow<T> CreateWorkflow<T>(T workflowData, string key) where T : new()
         {
             FatalException.ArgumentNullException(workflowData, nameof(workflowData));
@@ -51,7 +50,6 @@ namespace WorkflowSDK.Core
             _workflows.Add(key, wf);
             return wf;
         }
-
         public IWorkflow<T> GetWorkflow<T>(string key) where T : new()
         {
             key = typeof(T).GenerateKey(key);

@@ -2,10 +2,14 @@
 
 namespace WorkflowSDK.Core.Model
 {
-    public abstract class FatalException : Exception
+    public class FatalException : Exception
     {
         internal Exception InnerMainException { get; set; }
 
+        internal protected FatalException()
+        {
+                
+        }
         public static void ArgumentException(string message)
         {
             throw new FatalException<ArgumentException>

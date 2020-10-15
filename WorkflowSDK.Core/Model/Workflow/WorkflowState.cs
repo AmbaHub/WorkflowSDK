@@ -4,7 +4,6 @@
     {
         public IWorkflow Workflow { get; set; }
         public Step Step { get; set; }
-      
     }
    
 }
