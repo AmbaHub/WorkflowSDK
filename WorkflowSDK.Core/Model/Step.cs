@@ -36,7 +36,8 @@ namespace WorkflowSDK.Core.Model
             FatalException.ArgumentNullException(workflow, nameof(workflow));
 
             return await Task.Run(() =>
-                InvokeFunction(() =>
+                InvokeFunction(
+                    () =>
                 {
                     Logger.Log(workflow);
 
@@ -63,7 +64,8 @@ namespace WorkflowSDK.Core.Model
         private bool Validate(IWorkflow workflow)
         {
             var isValid = true;
-            if (_workflowDataValidators == null || _workflowDataValidators.Any(v => v == null)) return true;
+            if (_workflowDataValidators == null || _workflowDataValidators.Any(v => v == null))
+                return true;
 
             foreach (var validator in _workflowDataValidators)
             {
