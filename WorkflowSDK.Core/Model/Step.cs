@@ -16,7 +16,12 @@ namespace WorkflowSDK.Core.Model
         protected readonly IWorkflowManager WorkflowManager;
         public StepSettings StepSettings { get; }
 
-        protected internal Step(StepSettings stepSettings, ILogger logger, IWorkflowManager workflowManager, IStepFactory stepFactory, WorkflowDataValidator[] workflowDataValidators)
+        protected internal Step(
+            StepSettings stepSettings,
+            ILogger logger, 
+            IWorkflowManager workflowManager,
+            IStepFactory stepFactory, 
+            WorkflowDataValidator[] workflowDataValidators)
         {
             WorkflowManager = workflowManager;
             _workflowDataValidators = workflowDataValidators;
@@ -50,7 +55,7 @@ namespace WorkflowSDK.Core.Model
                         return workflow.RunPrevious().Result;
 
                     if (StepSettings.OnFailedStep != null)
-                        Task.Run(() => InvokeAction(() => StepSettings.OnFailedStep.Invoke()));
+                        Task.Run(() => InvokeAction(StepSettings.OnFailedStep));
 
                     return null;
                 }));

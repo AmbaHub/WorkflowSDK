@@ -66,17 +66,6 @@ namespace WorkflowSDK.Core.Model
                 ? $"{type.FullName}.{key}"
                 : $"{type.FullName}";
         }
-        internal static T CreateInstance<T>()
-        {
-            try
-            {
-                return Activator.CreateInstance<T>();
-            }
-            catch (Exception e)
-            {
-                throw new FatalException { InnerMainException = e };
-            }
-        }
         internal static T CreateInstance<T>(this Type type, object[] args)
         {
             try
@@ -88,14 +77,12 @@ namespace WorkflowSDK.Core.Model
                 throw new FatalException {InnerMainException = e};
             }
         }
-        
-        private static PropertyInfo[] GetProperties(object workflowData)
+        private static IEnumerable<PropertyInfo> GetProperties(object workflowData)
         {
             return workflowData
                 .GetType()
                 .GetProperties(BindingFlags.Public & BindingFlags.GetProperty & BindingFlags.SetProperty)
-                .Where(p => p.GetCustomAttribute<IgnoreAttribute>() == null)
-                .ToArray();
+                .Where(p => p.GetCustomAttribute<IgnoreAttribute>() == null);
         }
 
 

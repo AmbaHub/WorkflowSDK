@@ -98,7 +98,7 @@ namespace WorkflowSDK.Core.Model.Workflow
                 
         }
        
-        public virtual void CopyTo<TF>(IWorkflow<TF> other, bool overwrite) 
+        public void CopyTo<TF>(IWorkflow<TF> other, bool overwrite) 
             where TF : new()
         {
             FatalException.ArgumentNullException(other, nameof(other));
@@ -109,12 +109,14 @@ namespace WorkflowSDK.Core.Model.Workflow
             other.WorkflowData.SetContent(WorkflowData.GetContent(), overwrite);
         }
 
-        public virtual IWorkflow<TF> As<TF>() where TF : new()
+        public IWorkflow<TF> As<TF>() where TF : new()
         {
             using (this)
             {
-                var wf = InternalExtensions.CreateInstance<Workflow<TF>>();
-                wf.WorkflowData = new TF();
+                var wf = new Workflow<TF>
+                {
+                    WorkflowData = new TF()
+                };
                 CopyTo(wf,true);
                 return wf;
             }
