@@ -8,9 +8,9 @@ namespace WorkflowSDK.Core.Model.Workflow
     {
         WorkflowStatus WorkflowStatus { get; }
         void RunInBackground(Step step, string key = null);
-        Task<TFlow> AwaitProcessAsync<TFlow, TStep>(string key = null)
-            where TFlow : IWorkflow
-            where TStep : Step<TFlow>;
+        Task<TF> AwaitProcessAsync<TF, TS>(string key = null)
+            where TF : IWorkflow
+            where TS : Step<TF>;
         Task<TFlow> Run<TFlow, TStep>(TStep step)
             where TFlow : IWorkflow
             where TStep : Step<TFlow>;
