@@ -7,14 +7,15 @@ using WorkflowSDK.Core.Model.Workflow;
 
 namespace WorkflowSDK.Core
 {
-    public interface IWorkflowManager
+    public interface IWorkflowManager : IDisposable
     {
         IEnumerable<IWorkflow> AllWorkflows { get; }
         IWorkflow<T> CreateWorkflow<T>(T workflowData) where T : new();
         IWorkflow<T> CreateWorkflow<T>(T workflowData, string key) where T : new();
+        IWorkflow<T> GetWorkflow<T>() where T : new();
         IWorkflow<T> GetWorkflow<T>(string key) where T : new();
     }
-    public class WorkflowManager : IWorkflowManager, IDisposable
+    public class WorkflowManager : IWorkflowManager
     {
         private readonly Dictionary<string, IWorkflow> _workflows = new Dictionary<string, IWorkflow>();
         public IEnumerable<IWorkflow> AllWorkflows => _workflows.Select(x => x.Value);
@@ -32,12 +33,16 @@ namespace WorkflowSDK.Core
             _workflows.Add(key, wf);
             return wf;
         }
+        public IWorkflow<T> GetWorkflow<T>() where T : new() => GetWorkflow<T>(null);
         public IWorkflow<T> GetWorkflow<T>(string key) where T : new()
         {
             key = typeof(T).GenerateKey(key);
 
             if (_workflows.TryGetValue(key, out var value))
-                return (IWorkflow<T>) value;
+                if (value is IWorkflow<T> wf)
+                    return wf;
+                else
+                    throw FatalException.GetFatalException("");
 
             throw FatalException.GetFatalException("");
         }
