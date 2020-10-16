@@ -85,13 +85,19 @@ namespace WorkflowSDK.Core.Model.Workflow
         }
     }
 
-    public abstract class Workflow<T> : Workflow, IWorkflow<T> where T : new()
+    public class Workflow<T> : Workflow, IWorkflow<T> where T : new()
     {
         public T WorkflowData
         {
             get => (T) WorkflowDataObject;
             set => WorkflowDataObject = value;
         }
+
+        internal Workflow()
+        {
+                
+        }
+       
         public virtual void CopyTo<TF>(IWorkflow<TF> other, bool overwrite) 
             where TF : new()
         {
@@ -107,7 +113,7 @@ namespace WorkflowSDK.Core.Model.Workflow
         {
             using (this)
             {
-                var wf = InternalExtensions.CreateInstance<IWorkflow<TF>>();
+                var wf = InternalExtensions.CreateInstance<Workflow<TF>>();
                 wf.WorkflowData = new TF();
                 CopyTo(wf,true);
                 return wf;
