@@ -14,6 +14,8 @@ namespace WorkflowSDK.Core
         IWorkflow<T> CreateWorkflow<T>(T workflowData, string key) where T : new();
         IWorkflow<T> GetWorkflow<T>() where T : new();
         IWorkflow<T> GetWorkflow<T>(string key) where T : new();
+        void RemoveWorkflow<TF,TD>() where TF : IWorkflow<TD> where TD : new();
+        void RemoveWorkflow<TF,TD>(string key) where TF : IWorkflow<TD> where TD : new();
     }
     public class WorkflowManager : IWorkflowManager
     {
@@ -46,6 +48,24 @@ namespace WorkflowSDK.Core
 
             throw FatalException.GetFatalException("");
         }
+        public void RemoveWorkflow<TF, TD>() where TF : IWorkflow<TD> where TD : new() => RemoveWorkflow<TF,TD>(null);
+        public void RemoveWorkflow<TF, TD>(string key) 
+            where TF : IWorkflow<TD> 
+            where TD : new()
+        {
+            key = typeof(TD).GenerateKey(key);
+
+            if (_workflows.TryGetValue(key, out var workflow))
+            {
+                if (workflow is TF)
+                    _workflows.Remove(key);
+                else
+                    throw FatalException.GetFatalException(string.Empty);
+            }
+            else
+                throw FatalException.GetFatalException(string.Empty);
+        }
+
 
         public void Dispose()
         {
