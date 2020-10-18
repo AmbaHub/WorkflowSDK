@@ -1,17 +1,23 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml;
 using WorkflowSDK.Core.Model.Validation;
 
 namespace WorkflowSDK.Core.Model.DI
 {
-    public class StepDependencyProvider : IStepDependencyProvider, IStepSettingsProvider, IWorkflowValidatorProvider
+    public class StepDependencyProvider :
+        IStepDependencyProvider,
+        IStepSettingsProvider,
+        IWorkflowValidatorProvider
     {
-        private readonly List<StepDependencyPack> _dependencyPacks;
+        public readonly List<StepDependencyPack> DependencyPacks;
 
         public StepDependencyProvider(List<StepDependencyPack> dependencyPacks)
         {
-            _dependencyPacks = dependencyPacks;
+            DependencyPacks = dependencyPacks;
         }
         public object[] GetStepDependencies<T>() where T : Step => GetStepDependencyPack<T>().StepDependencies;
         public StepSettings GetStepSettings<T>() where T : Step => GetStepDependencyPack<T>().StepSettings;
@@ -20,15 +26,18 @@ namespace WorkflowSDK.Core.Model.DI
         private StepDependencyPack GetStepDependencyPack<T>() where T : Step
         {
             var type = typeof(T);
-            var pack = _dependencyPacks.SingleOrDefault(x => x.StepType == type);
+            var pack = DependencyPacks.SingleOrDefault(x => x.StepType == type);
 
             if (pack == null)
-            {
                 throw FatalException.GetFatalException(string.Empty);
-            }
 
             return pack;
         }
+
+      
     }
+
+
+
 
 }

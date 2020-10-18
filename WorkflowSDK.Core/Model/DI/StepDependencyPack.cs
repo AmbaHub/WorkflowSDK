@@ -1,20 +1,22 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using WorkflowSDK.Core.Model.Validation;
 
 namespace WorkflowSDK.Core.Model.DI
 {
-    public abstract class StepDependencyPack
+    [DataContract(Namespace = "")]
+    public class StepDependencyPack
     {
-        internal abstract Type StepType { get; }
-
+        [DataMember]
+        public Type StepType { get; set; }
+        [DataMember]
         public object[] StepDependencies { get; set; }
+        [DataMember]
         public StepSettings StepSettings { get; set; }
+        [DataMember]
         public WorkflowDataValidator[] WorkflowDataValidators { get; set; }
 
     }
 
-    public class StepDependencyPack<T> : StepDependencyPack where T : Step
-    {
-        internal override Type StepType => typeof(T);
-    }
+   
 }
