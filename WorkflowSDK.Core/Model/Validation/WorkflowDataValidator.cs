@@ -19,9 +19,15 @@ namespace WorkflowSDK.Core.Model.Validation
             _onFailedValidation = onFailedValidation;
         }
 
+        public WorkflowDataValidator(Func<T, bool> validationFunction)
+        {
+            _validationFunction = validationFunction;
+            _onFailedValidation = null;
+        }
+
         public sealed override Action<IWorkflow> OnValidationFailed => wf =>
         {
-            if (wf is T w) 
+            if (wf is T w)
                 _onFailedValidation?.Invoke(w);
         };
 

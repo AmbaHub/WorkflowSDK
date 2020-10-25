@@ -4,19 +4,22 @@ using WorkflowSDK.Core.Model.Validation;
 
 namespace WorkflowSDK.Core.Model.DI
 {
-    [DataContract(Namespace = "")]
     public class StepDependencyPack
     {
-        [DataMember]
-        public Type StepType { get; set; }
-        [DataMember]
+        public Type StepType { get; protected internal set; }
         public object[] StepDependencies { get; set; }
-        [DataMember]
         public StepSettings StepSettings { get; set; }
-        [DataMember]
         public WorkflowDataValidator[] WorkflowDataValidators { get; set; }
-
     }
 
-   
+    public class StepDependencyPack<T> : StepDependencyPack where T : Step
+    {
+        public StepDependencyPack()
+        {
+            StepType = typeof(T);
+        }
+    }
+
+
+
 }

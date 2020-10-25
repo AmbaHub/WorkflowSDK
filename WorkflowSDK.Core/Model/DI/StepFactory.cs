@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using WorkflowSDK.Log;
+using Autofac;
 
 namespace WorkflowSDK.Core.Model.DI
 {
@@ -33,6 +35,7 @@ namespace WorkflowSDK.Core.Model.DI
 
         public T Build<T>() where T : Step
         {
+
             var parameters = new List<object>
             {
                 _stepSettingsProvider.GetStepSettings<T>(),
@@ -46,5 +49,8 @@ namespace WorkflowSDK.Core.Model.DI
 
             return typeof(T).CreateInstance<T>(parameters.ToArray());
         }
+        
     }
+
+  
 }
