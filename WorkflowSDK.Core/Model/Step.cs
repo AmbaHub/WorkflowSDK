@@ -126,12 +126,12 @@ namespace WorkflowSDK.Core.Model
 
     public abstract class Step<T> : Step where T : IWorkflow
     {
-        protected abstract WorkflowState Run(T workflow);
+        protected abstract (IWorkflow workflow, Step next) Run(T workflow);
         protected sealed override IWorkflow Run(IWorkflow workflow)
         {
             var result = Run((T) workflow);
-            result.Workflow.WorkflowStatus.Next = result.Step;
-            return result.Workflow;
+            result.workflow.WorkflowStatus.Next = result.next;
+            return result.workflow;
         }
 
         protected Step(

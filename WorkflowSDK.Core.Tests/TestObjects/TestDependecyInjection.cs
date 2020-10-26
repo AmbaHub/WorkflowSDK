@@ -27,12 +27,7 @@ namespace WorkflowSDK.Core.Tests.TestObjects
                         StepAction = wf =>
                     {
                          wf.WorkflowData.Data += "s";
-                         return new WorkflowState
-                         {
-                             Workflow = wf,
-                             Step = null
-                         };
-
+                         return (wf, null);
                     }
                 } }}
             });

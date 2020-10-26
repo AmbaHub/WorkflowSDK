@@ -32,8 +32,6 @@ namespace WorkflowSDK.Core.Model.DI
 
             _containerBuilder.RegisterType<StepFactory>().As<IStepFactory>();
             _containerBuilder.RegisterType<WorkflowSdkClient>().As<IWorkflowSdkClient>();
-
-
         }
        
     }

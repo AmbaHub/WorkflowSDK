@@ -23,12 +23,16 @@ namespace WorkflowSDK.Core.Tests.TestObjects
         }
 
 
-        protected override WorkflowState Run(Workflow<TestDataClass> workflow)
+        //protected override WorkflowState Run(Workflow<TestDataClass> workflow)
+        //{
+        //    var workflowState = _testStepDependency.StepAction?.Invoke(workflow);
+        //    if (workflowState != null)
+        //        workflowState.Step = this;
+        //    return workflowState;
+        //}
+        protected override (IWorkflow workflow, Step next) Run(Workflow<TestDataClass> workflow)
         {
-            var workflowState = _testStepDependency.StepAction?.Invoke(workflow);
-            if (workflowState != null)
-                workflowState.Step = this;
-            return workflowState;
+            throw new NotImplementedException();
         }
     }
 }
