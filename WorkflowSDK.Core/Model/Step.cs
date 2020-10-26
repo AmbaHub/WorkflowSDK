@@ -75,7 +75,7 @@ namespace WorkflowSDK.Core.Model
                 isValid = false;
 
                 if (StepSettings.ThrowOnFailedValidation)
-                    throw new FatalException<Exception>();
+                    throw FatalException.GetFatalException(string.Empty);
 
                 if (validator.OnValidationFailed == null) continue;
 
@@ -129,7 +129,7 @@ namespace WorkflowSDK.Core.Model
         protected abstract WorkflowState Run(T workflow);
         protected sealed override IWorkflow Run(IWorkflow workflow)
         {
-            var result = Run((T)workflow);
+            var result = Run((T) workflow);
             result.Workflow.WorkflowStatus.Next = result.Step;
             return result.Workflow;
         }

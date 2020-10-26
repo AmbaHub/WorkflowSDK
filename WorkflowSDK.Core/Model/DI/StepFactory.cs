@@ -23,7 +23,7 @@ namespace WorkflowSDK.Core.Model.DI
             ILogger logger,
             IWorkflowManager workflowManager,
             IWorkflowValidatorProvider workflowValidatorProvider,
-            IStepSettingsProvider stepSettingsProvider, 
+            IStepSettingsProvider stepSettingsProvider,
             IStepDependencyProvider stepDependencyProvider)
         {
             _logger = logger;
@@ -35,22 +35,32 @@ namespace WorkflowSDK.Core.Model.DI
 
         public T Build<T>() where T : Step
         {
+            var type = typeof(T);
 
-            var parameters = new List<object>
+            var original = new List<object>()
             {
                 _stepSettingsProvider.GetStepSettings<T>(),
                 _logger,
                 _workflowManager,
                 this,
-                _workflowValidatorProvider.GetValidators<T>()
+                _workflowValidatorProvider.GetValidators<T>(),
             };
+            original.AddRange(_stepDependencyProvider.GetStepDependencies<T>());
 
-            parameters.Insert(0,_stepDependencyProvider.GetStepDependencies<T>());
-
-            return typeof(T).CreateInstance<T>(parameters.ToArray());
+            var parameters = type.GetConstructors()
+                .Single(c => c.IsPublic)
+                .GetParameters()
+                .Select(x => x.ParameterType)
+                .Select(t => original.SingleOrDefault(t.IsInstanceOfType))
+                .ToArray();
+            
+            return type.CreateInstance<T>(parameters);
         }
-        
+
     }
 
-  
+   
+
+
+
 }

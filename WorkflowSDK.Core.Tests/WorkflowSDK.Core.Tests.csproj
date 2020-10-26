@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WorkflowSDK.Core\WorkflowSDK.Core.csproj" />
+    <ProjectReference Include="..\WorkflowSDK\WorkflowSDK.csproj" />
   </ItemGroup>
 
 </Project>

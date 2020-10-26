@@ -1,4 +1,5 @@
-﻿using WorkflowSDK.Core.Model;
+﻿using System;
+using WorkflowSDK.Core.Model;
 using WorkflowSDK.Core.Model.DI;
 using WorkflowSDK.Core.Model.Validation;
 using WorkflowSDK.Core.Model.Workflow;
@@ -6,25 +7,28 @@ using WorkflowSDK.Log;
 
 namespace WorkflowSDK.Core.Tests.TestObjects
 {
-    public class TestStep : Step<TestWorkflow>
+    public class TestStep : Step<Workflow<TestDataClass>>
     {
         private readonly TestStepDependency _testStepDependency;
         public TestStep(
             TestStepDependency testStepDependency,
-            StepSettings stepSettings, 
-            ILogger logger, 
+            StepSettings stepSettings,
+            ILogger logger,
             IWorkflowManager workflowManager,
             IStepFactory stepFactory,
-            WorkflowDataValidator[] workflowDataValidators) : 
+            WorkflowDataValidator[] workflowDataValidators) :
             base(stepSettings, logger, workflowManager, stepFactory, workflowDataValidators)
         {
             _testStepDependency = testStepDependency;
         }
 
 
-        protected override WorkflowState Run(TestWorkflow workflow)
+        protected override WorkflowState Run(Workflow<TestDataClass> workflow)
         {
-            throw new System.NotImplementedException();
+            var workflowState = _testStepDependency.StepAction?.Invoke(workflow);
+            if (workflowState != null)
+                workflowState.Step = this;
+            return workflowState;
         }
     }
 }

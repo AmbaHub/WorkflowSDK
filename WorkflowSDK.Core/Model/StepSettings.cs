@@ -2,7 +2,7 @@
 
 namespace WorkflowSDK.Core.Model
 {
-    public sealed class StepSettings
+    public class StepSettings
     {
         public bool ThrowOnError { get; set; }
         public bool ExitFromFlow { get; set; }

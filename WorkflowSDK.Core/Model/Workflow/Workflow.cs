@@ -47,7 +47,7 @@ namespace WorkflowSDK.Core.Model.Workflow
 
         public async Task<TFlow> Run<TFlow, TStep>(TStep step)
             where TFlow : IWorkflow
-            where TStep : Step<TFlow>
+            where TStep : Step
         {
             var result = await this.RunWorkflowAsync(step);
             if (result is TFlow correctResultType)

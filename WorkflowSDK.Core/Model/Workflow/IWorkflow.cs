@@ -13,7 +13,7 @@ namespace WorkflowSDK.Core.Model.Workflow
             where TS : Step<TF>;
         Task<TFlow> Run<TFlow, TStep>(TStep step)
             where TFlow : IWorkflow
-            where TStep : Step<TFlow>;
+            where TStep : Step;
         Task<IWorkflow> RunPrevious();
         IWorkflow Clone();
     }
