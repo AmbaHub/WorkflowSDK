@@ -2,6 +2,7 @@
 {
     public interface IStepDependencyProvider
     {
+
         object[] GetStepDependencies<T>() where T : Step;
     }
 }

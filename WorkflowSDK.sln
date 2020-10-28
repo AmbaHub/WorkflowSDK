@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowSDK.Core", "Workflo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowSDK.Log", "WorkflowSDK.Log\WorkflowSDK.Log.csproj", "{F1C315D1-84BF-458C-9321-E7E85209A039}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowSDK.Core.Tests", "WorkflowSDK.Core.Tests\WorkflowSDK.Core.Tests.csproj", "{EB66FD3E-FF37-49AD-A85F-DA823EF8086A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowSDK.Core.Tests", "WorkflowSDK.Core.Tests\WorkflowSDK.Core.Tests.csproj", "{EB66FD3E-FF37-49AD-A85F-DA823EF8086A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowSDK.Business", "WorkflowSDK.Business\WorkflowSDK.Business.csproj", "{C3F5E28F-350A-49AA-9452-759C9CC2B022}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{EB66FD3E-FF37-49AD-A85F-DA823EF8086A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB66FD3E-FF37-49AD-A85F-DA823EF8086A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB66FD3E-FF37-49AD-A85F-DA823EF8086A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3F5E28F-350A-49AA-9452-759C9CC2B022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3F5E28F-350A-49AA-9452-759C9CC2B022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3F5E28F-350A-49AA-9452-759C9CC2B022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3F5E28F-350A-49AA-9452-759C9CC2B022}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

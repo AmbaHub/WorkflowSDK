@@ -18,9 +18,9 @@ namespace WorkflowSDK.Core.Model
 
         protected internal Step(
             StepSettings stepSettings,
-            ILogger logger, 
+            ILogger logger,
             IWorkflowManager workflowManager,
-            IStepFactory stepFactory, 
+            IStepFactory stepFactory,
             WorkflowDataValidator[] workflowDataValidators)
         {
             WorkflowManager = workflowManager;
@@ -44,10 +44,10 @@ namespace WorkflowSDK.Core.Model
                     if (Validate(workflow))
                         return Run(workflow);
 
-                    if (workflow.WorkflowStatus.Next != null)
-                        workflow.WorkflowStatus.Next.StepSettings.ExitFromFlow = true;
-                    else
+                    if (workflow.WorkflowStatus.Next == null)
                         return null;
+
+                    workflow.WorkflowStatus.Next.StepSettings.ExitFromFlow = true;
                     return workflow;
                 },
                 () =>
@@ -129,9 +129,9 @@ namespace WorkflowSDK.Core.Model
         protected abstract (IWorkflow workflow, Step next) Run(T workflow);
         protected sealed override IWorkflow Run(IWorkflow workflow)
         {
-            var result = Run((T) workflow);
-            result.workflow.WorkflowStatus.Next = result.next;
-            return result.workflow;
+            var (wf, next) = Run((T)workflow);
+            wf.WorkflowStatus.Next = next;
+            return wf;
         }
 
         protected Step(

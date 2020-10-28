@@ -10,6 +10,7 @@ namespace WorkflowSDK.Core
     {
         private readonly Dictionary<string, IWorkflow> _workflows = new Dictionary<string, IWorkflow>();
         public IEnumerable<IWorkflow> AllWorkflows => _workflows.Select(x => x.Value);
+        public IWorkflow<T> CreateWorkflow<T>() where T : new() => CreateWorkflow(new T(), null);
         public IWorkflow<T> CreateWorkflow<T>(T workflowData) where T : new() => CreateWorkflow(workflowData, null);
         public IWorkflow<T> CreateWorkflow<T>(T workflowData, string key) where T : new()
         {

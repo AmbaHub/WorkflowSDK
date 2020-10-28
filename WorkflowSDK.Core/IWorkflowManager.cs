@@ -7,6 +7,7 @@ namespace WorkflowSDK.Core
     public interface IWorkflowManager : IDisposable
     {
         IEnumerable<IWorkflow> AllWorkflows { get; }
+        IWorkflow<T> CreateWorkflow<T>() where T : new();
         IWorkflow<T> CreateWorkflow<T>(T workflowData) where T : new();
         IWorkflow<T> CreateWorkflow<T>(T workflowData, string key) where T : new();
         IWorkflow<T> GetWorkflow<T>() where T : new();

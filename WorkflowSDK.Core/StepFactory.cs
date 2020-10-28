@@ -32,7 +32,7 @@ namespace WorkflowSDK.Core.Model.DI
         {
             var type = typeof(T);
 
-            var original = new List<object>()
+            var original = new List<object>
             {
                 _stepSettingsProvider.GetStepSettings<T>(),
                 _logger,
@@ -40,6 +40,7 @@ namespace WorkflowSDK.Core.Model.DI
                 this,
                 _workflowValidatorProvider.GetValidators<T>(),
             };
+
             original.AddRange(_stepDependencyProvider.GetStepDependencies<T>());
 
             var parameters = type.GetConstructors()

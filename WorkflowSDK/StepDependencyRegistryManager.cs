@@ -6,6 +6,7 @@ using Autofac;
 using Autofac.Builder;
 using Newtonsoft.Json;
 using WorkflowSDK.Log;
+using System.Configuration;
 
 namespace WorkflowSDK.Core.Model.DI
 {
