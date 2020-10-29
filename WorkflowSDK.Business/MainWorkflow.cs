@@ -27,9 +27,9 @@ namespace WorkflowSDK.Business
             where TStep : Step
             where TData : new()
         {
-            var wf = _workflowManager.CreateWorkflow(data);
+            var workflow = _workflowManager.CreateWorkflow(data);
             var step = _stepFactory.Build<TStep>();
-            var result = await wf.Run<IWorkflow, TStep>(step);
+            var result = await workflow.Run<IWorkflow, TStep>(step);
 
             onCompletedWorkflow.Invoke(result);
         }
