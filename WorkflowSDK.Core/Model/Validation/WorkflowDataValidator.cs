@@ -22,7 +22,7 @@ namespace WorkflowSDK.Core.Model.Validation
         public WorkflowDataValidator(Func<T, bool> validationFunction)
         {
             _validationFunction = validationFunction;
-            _onFailedValidation = null;
+            _onFailedValidation = t => { };
         }
 
         public sealed override Action<IWorkflow> OnValidationFailed => wf =>

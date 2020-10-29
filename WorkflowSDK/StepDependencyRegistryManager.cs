@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json.Serialization;
 using Autofac;
-using Autofac.Builder;
 using Newtonsoft.Json;
+using WorkflowSDK.Core;
+using WorkflowSDK.Core.Model.DI;
 using WorkflowSDK.Log;
-using System.Configuration;
 
-namespace WorkflowSDK.Core.Model.DI
+namespace WorkflowSDK
 {
     public class DependencyRegistryManager
     {

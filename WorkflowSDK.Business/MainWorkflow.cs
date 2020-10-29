@@ -6,7 +6,6 @@ using WorkflowSDK.Core.Model;
 using WorkflowSDK.Core.Model.DI;
 using WorkflowSDK.Core.Model.Validation;
 using WorkflowSDK.Core.Model.Workflow;
-using WorkflowSDK.Log;
 
 namespace WorkflowSDK.Business
 {

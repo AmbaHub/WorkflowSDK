@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 
 namespace WorkflowSDK.Core.Model.DI
 {

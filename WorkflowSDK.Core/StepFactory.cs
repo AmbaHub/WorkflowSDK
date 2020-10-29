@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using WorkflowSDK.Core.Model;
+using WorkflowSDK.Core.Model.DI;
 using WorkflowSDK.Log;
-using Autofac;
 
-namespace WorkflowSDK.Core.Model.DI
+namespace WorkflowSDK.Core
 {
     public class StepFactory : IStepFactory
     {

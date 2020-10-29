@@ -1,4 +1,6 @@
-﻿namespace WorkflowSDK.Core.Model.DI
+﻿using WorkflowSDK.Core.Model;
+
+namespace WorkflowSDK.Core
 {
     public interface IStepFactory
     {
