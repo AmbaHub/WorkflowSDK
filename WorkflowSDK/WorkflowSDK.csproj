@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WorkflowSDK.Business\WorkflowSDK.Business.csproj" />
     <ProjectReference Include="..\WorkflowSDK.Core\WorkflowSDK.Core.csproj" />
   </ItemGroup>
 
