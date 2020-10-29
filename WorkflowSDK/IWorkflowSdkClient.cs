@@ -10,5 +10,6 @@ namespace WorkflowSDK
         IWorkflowManager WorkflowManager { get; }
         IStepFactory StepFactory { get; }
         ILogger Logger { get; }
+
     }
 }

@@ -23,7 +23,7 @@ namespace WorkflowSDK.Business
             _workflowManager = workflowManager; 
         }
         
-        public async void Start<TData, TStep>(TData data, Action<IWorkflow> onCompletedWorkflow)
+        public async Task Start<TData, TStep>(TData data, Action<IWorkflow> onCompletedWorkflow)
             where TStep : Step
             where TData : new()
         {
