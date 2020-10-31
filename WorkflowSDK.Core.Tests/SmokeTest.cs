@@ -21,10 +21,8 @@ namespace WorkflowSDK.Core.Tests
         public void Test()
         {
             var testData = new TestDataClass {Data = DateTime.Today.ToString(CultureInfo.InvariantCulture)};
-            var wf = WorkflowSdkClient.WorkflowManager.CreateWorkflow(testData);
-            var step = WorkflowSdkClient.StepFactory.Build<TestStep>();
+            WorkflowSdkClient.Start<TestDataClass, TestStep>(testData, workflow => { });
 
-            var flow = wf.Run<IWorkflow<TestDataClass>, TestStep>(step).Result;
         }
     }
 }

@@ -10,13 +10,11 @@ namespace WorkflowSDK
 {
     public interface IWorkflowSdkClient : IDisposable
     {
-        IWorkflowManager WorkflowManager { get; }
-        IStepFactory StepFactory { get; }
-        ILogger Logger { get; }
-
-        Task Start<TData, TStep>(TData data, Action<IWorkflow> onCompletedWorkflow)
+        Task Start<TData, TStep>(TData data)
             where TStep : Step
             where TData : new();
-
+        Task Start<TData, TStep>(TData data, Action<IWorkflow> onCompletedWorkflow)
+                where TStep : Step
+                where TData : new();
     }
 }

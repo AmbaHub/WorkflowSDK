@@ -12,10 +12,7 @@ namespace WorkflowSDK
     public class WorkflowSdkClient : IWorkflowSdkClient
     {
         private readonly MainWorkflowManager _mainWorkflowManager;
-
-        public IWorkflowManager WorkflowManager { get; }
-        public IStepFactory StepFactory { get; }
-        public ILogger Logger { get; }
+        private readonly ILogger _logger;
 
         public WorkflowSdkClient(
             IWorkflowManager workflowManager,
@@ -24,39 +21,45 @@ namespace WorkflowSDK
         {
             _mainWorkflowManager = new MainWorkflowManager(stepFactory, workflowManager);
 
-            WorkflowManager = workflowManager;
-            StepFactory = stepFactory;
-            Logger = logger;
+            _logger = logger;
+        }
+
+        public Task Start<TData, TStep>(TData data) 
+            where TData : new() 
+            where TStep : Step
+        {
+            _logger.Log(LogLevel.Info, "Main Workflow started without result handling.");
+            return Start<TData, TStep>(data, wf => { });
         }
 
         public async Task Start<TData, TStep>(TData data, Action<IWorkflow> onCompletedWorkflow) 
             where TData : new() 
             where TStep : Step
         {
-            Logger.Log(LogLevel.Trace, "Main Workflow started.");
+            _logger.Log(LogLevel.Trace, "Main Workflow started.");
             var task = _mainWorkflowManager.Start<TData, TStep>(data, onCompletedWorkflow);
             await task;
 
             if (task.IsCompletedSuccessfully)
             {
-                Logger.Log(LogLevel.Trace, "Main Workflow completed successfully.");
+                _logger.Log(LogLevel.Trace, "Main Workflow completed successfully.");
             }
 
             if (task.Exception != null)
             {
-                Logger.LogFatalException(task.Exception);
+                _logger.LogFatalException(task.Exception);
             }
 
             if (task.IsFaulted)
             {
-                Logger.LogFatalException(FatalException.GetFatalException("Main workflow stoped unexpeted"));
+                _logger.LogFatalException(FatalException.GetFatalException("Main workflow stopped unexpected."));
             }
 
 
         }
         public void Dispose()
         {
-            WorkflowManager?.Dispose();
+            _mainWorkflowManager?.Dispose();
         }
     }
 }

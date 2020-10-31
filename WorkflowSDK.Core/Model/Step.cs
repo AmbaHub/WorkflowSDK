@@ -11,27 +11,21 @@ namespace WorkflowSDK.Core.Model
     public abstract class Step
     {
         private readonly WorkflowDataValidator[] _workflowDataValidators;
-        protected readonly ILogger Logger;
-        protected readonly IStepFactory StepFactory;
-        protected readonly IWorkflowManager WorkflowManager;
+        private readonly ILogger _logger;
         public StepSettings StepSettings { get; }
 
         protected internal Step(
             StepSettings stepSettings,
             ILogger logger,
-            IWorkflowManager workflowManager,
-            IStepFactory stepFactory,
             WorkflowDataValidator[] workflowDataValidators)
         {
-            WorkflowManager = workflowManager;
             _workflowDataValidators = workflowDataValidators;
-            Logger = logger;
-            StepFactory = stepFactory;
+            _logger = logger;
             StepSettings = stepSettings;
         }
         protected abstract IWorkflow Run(IWorkflow workflow);
 
-        internal async Task<IWorkflow> RunAsync(IWorkflow workflow)
+        internal async Task<IWorkflow> RunAsync(IWorkflow workflow) //todo implement with cancellation token
         {
             FatalException.ArgumentNullException(workflow, nameof(workflow));
 
@@ -39,7 +33,7 @@ namespace WorkflowSDK.Core.Model
                 InvokeFunction(
                     () =>
                 {
-                    Logger.Log(workflow);
+                    _logger.Log(workflow);
 
                     if (Validate(workflow))
                         return Run(workflow);
@@ -92,12 +86,12 @@ namespace WorkflowSDK.Core.Model
             }
             catch (FatalException fe)
             {
-                Logger.LogFatalException(fe);
+                _logger.LogFatalException(fe);
                 throw;
             }
             catch (Exception e)
             {
-                Logger.LogException(e);
+                _logger.LogException(e);
                 if (StepSettings.ThrowOnError) throw;
             }
 
@@ -110,12 +104,12 @@ namespace WorkflowSDK.Core.Model
             }
             catch (FatalException fe)
             {
-                Logger.LogFatalException(fe);
+                _logger.LogFatalException(fe);
                 throw;
             }
             catch (Exception e)
             {
-                Logger.LogException(e);
+                _logger.LogException(e);
                 onErrorAction?.Invoke();
                 if (StepSettings.ThrowOnError) throw;
             }
@@ -126,6 +120,12 @@ namespace WorkflowSDK.Core.Model
 
     public abstract class Step<T> : Step where T : IWorkflow
     {
+        protected Step(StepSettings stepSettings, ILogger logger, WorkflowDataValidator[] workflowDataValidators) 
+            : base(stepSettings, logger, workflowDataValidators)
+        {
+
+        }
+
         protected abstract (IWorkflow workflow, Step next) Run(T workflow);
         protected sealed override IWorkflow Run(IWorkflow workflow)
         {
@@ -134,18 +134,8 @@ namespace WorkflowSDK.Core.Model
             return wf;
         }
 
-        protected Step(
-            StepSettings stepSettings,
-            ILogger logger,
-            IWorkflowManager workflowManager,
-            IStepFactory stepFactory,
-            WorkflowDataValidator[] workflowDataValidators) :
-            base(stepSettings, logger, workflowManager, stepFactory, workflowDataValidators)
-        {
 
 
-
-        }
 
     }
 }
