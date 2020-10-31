@@ -35,7 +35,7 @@ namespace WorkflowSDK.Business
 
             onCompletedWorkflow.Invoke(result);
         }
-
+        public IWorkflow<T> GetWorkflow<T>() where T : new() => _workflowManager.CreateWorkflow<T>();
         public T GetNextStep<T>() where T : Step
         {
             var type = typeof(T);
@@ -46,17 +46,6 @@ namespace WorkflowSDK.Business
             _stepMemory.Add(type, step);
             return step;
 
-        }
-        public void StopWorkflow<T>(string key) where T : new()
-        {
-            var wf = _workflowManager.GetWorkflow<T>(key);
-
-
-            if (wf != null)
-            {
-                wf.WorkflowStatus.Current.Step.StepSettings.ExitFromFlow = true;
-                wf.Dispose();
-            }
         }
         public void StopWorkflow<T>() where T : new()
         {
