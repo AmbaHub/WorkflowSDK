@@ -31,7 +31,7 @@ namespace WorkflowSDK
             await Start<TData, TStep>(data, wf => { });
         }
 
-        public async Task Start<TData, TStep>(TData data, Action<IWorkflow> onCompletedWorkflow) 
+        public async Task Start<TData, TStep>(TData data, Action<object> onCompletedWorkflow) 
             where TData : new() 
             where TStep : Step
         {

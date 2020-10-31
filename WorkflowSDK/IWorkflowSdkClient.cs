@@ -13,7 +13,7 @@ namespace WorkflowSDK
         Task Start<TData, TStep>(TData data)
             where TStep : Step
             where TData : new();
-        Task Start<TData, TStep>(TData data, Action<IWorkflow> onCompletedWorkflow)
+        Task Start<TData, TStep>(TData data, Action<object> onCompletedWorkflow)
                 where TStep : Step
                 where TData : new();
     }

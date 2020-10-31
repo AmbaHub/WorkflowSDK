@@ -26,7 +26,7 @@ namespace WorkflowSDK.Business
             _workflowManager = workflowManager;
         }
 
-        public async Task Start<TData, TStep>(TData data, Action<IWorkflow> onCompletedWorkflow)
+        public async Task Start<TData, TStep>(TData data, Action<object> onCompletedWorkflow)
             where TStep : Step
             where TData : new()
         {
@@ -34,7 +34,9 @@ namespace WorkflowSDK.Business
             var step = GetNextStep<TStep>();
             var result = await workflow.Run<IWorkflow, TStep>(step);
 
-            onCompletedWorkflow.Invoke(result);
+            var wf = (IWorkflow<object>)result;
+
+            onCompletedWorkflow.Invoke(wf.WorkflowData);
         }
         public BusinessWorkflow<T> CreateWorkflow<T>(T data) where T : new()
         {
