@@ -19,17 +19,16 @@ namespace WorkflowSDK
             IStepFactory stepFactory,
             ILogger logger)
         {
-            _mainWorkflowManager = new MainWorkflowManager(stepFactory, workflowManager);
-
             _logger = logger;
+            _mainWorkflowManager = new MainWorkflowManager(stepFactory, workflowManager);
         }
 
-        public Task Start<TData, TStep>(TData data) 
+        public async Task Start<TData, TStep>(TData data) 
             where TData : new() 
             where TStep : Step
         {
             _logger.Log(LogLevel.Info, "Main Workflow started without result handling.");
-            return Start<TData, TStep>(data, wf => { });
+            await Start<TData, TStep>(data, wf => { });
         }
 
         public async Task Start<TData, TStep>(TData data, Action<IWorkflow> onCompletedWorkflow) 
@@ -45,6 +44,11 @@ namespace WorkflowSDK
                 _logger.Log(LogLevel.Trace, "Main Workflow completed successfully.");
             }
 
+            if (task.IsCanceled)
+            {
+                _logger.Log(LogLevel.Warning & LogLevel.Trace, "Main Workflow was canceled.");
+            }
+
             if (task.Exception != null)
             {
                 _logger.LogFatalException(task.Exception);
@@ -54,7 +58,6 @@ namespace WorkflowSDK
             {
                 _logger.LogFatalException(FatalException.GetFatalException("Main workflow stopped unexpected."));
             }
-
 
         }
         public void Dispose()

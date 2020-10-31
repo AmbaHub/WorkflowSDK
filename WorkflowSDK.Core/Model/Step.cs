@@ -14,6 +14,7 @@ namespace WorkflowSDK.Core.Model
         private readonly ILogger _logger;
         public StepSettings StepSettings { get; }
 
+        //todo - refactor constructor
         protected internal Step(
             StepSettings stepSettings,
             ILogger logger,

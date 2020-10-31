@@ -17,6 +17,14 @@ namespace WorkflowSDK.Business
         {
             MainWorkflowManager = mainWorkflowManager;
         }
-       
+
+        protected abstract (BusinessWorkflow workflow, Step next) Run(T data);
+        protected override (IWorkflow workflow, Step next) Run(IWorkflow<T> workflow)
+        {
+            var (wf, next) = Run(workflow.WorkflowData);
+            return (wf._workflow, next);
+        }
     }
+
+ 
 }

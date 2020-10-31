@@ -9,7 +9,6 @@ namespace WorkflowSDK.Core.Model.Workflow
     {
         protected internal object WorkflowDataObject { get; set; }
         protected internal Dictionary<string, Task<IWorkflow>> MemoryProcesses { get; set; }
-
         public WorkflowStatus WorkflowStatus { get; }
 
         protected internal Workflow()
@@ -67,7 +66,7 @@ namespace WorkflowSDK.Core.Model.Workflow
             }
         }
 
-        public IWorkflow Clone() => (Workflow)MemberwiseClone();
+        public IWorkflow Clone() => (IWorkflow)MemberwiseClone();
         public virtual void Dispose()
         {
             foreach (var (key, process) in MemoryProcesses)

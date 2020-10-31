@@ -1,5 +1,8 @@
-﻿namespace WorkflowSDK.Log
+﻿using System;
+
+namespace WorkflowSDK.Log
 {
+    [Flags]
     public enum LogLevel 
     {
         Default,
